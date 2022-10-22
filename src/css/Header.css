@@ -1,3 +1,6 @@
+a{
+    text-decoration:none !important;
+}
 .CartImage{
     position: relative;
 }
@@ -8,4 +11,11 @@ border-radius: 10px;
 position: absolute;
 z-index: 999;
 right: 1rem;
+width: 25% ;
 }
+
+@media (max-width: 576px) { 
+    .CartsShow{
+        width: 85%;
+    }
+ }

@@ -8,9 +8,11 @@ const Header = ({ CartItem }) => {
     const [ShowCart, setShowCart] = useState(false);
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="light" className="mb-4">
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="mb-4">
                 <Container>
-                    <Navbar.Brand className="text-white">Amaxon</Navbar.Brand>
+                    <Link to="/" >
+                        <Navbar.Brand className="text-white">Amaxon</Navbar.Brand>
+                    </Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
@@ -33,16 +35,16 @@ const Header = ({ CartItem }) => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {ShowCart && <div className="CartsShow w-25 rounded">
+            {ShowCart && <div className="CartsShow  rounded">
                 {CartItem.map((item) => {
                     return <div className='px-3 py-2 bg-white d-flex gap-5 border-bottom'>
-                        <img width="50px" src={item.Image} alt="" />
+                        <img width="50rem" src={item.Image} alt="" />
                         <p>
                             {item.Tittle.slice(0, 20)}
                         </p>
                     </div>
                 })}
-               <Link to="/cart"> <Button className="w-100" >Show More</Button></Link> 
+                <Link to="/cart"> <Button className="w-100" >Show More</Button></Link>
             </div>}
 
         </div>

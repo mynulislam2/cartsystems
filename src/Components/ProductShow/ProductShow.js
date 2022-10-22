@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useReducer, useState } from 'react';
-import { Container, Form, Col, Row } from 'react-bootstrap';
+import { Container, Form, Col, Row, Spinner } from 'react-bootstrap';
 import { ProductsApi } from '../../Api/ProductsApi';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -62,7 +62,12 @@ const ProductShow = ({setCartItem}) => {
         }
     }
 
+if(Products.length==0){
+    return<div className='d-flex justify-content-center align-items-center' style={{height:"100vh"}}>
+              <Spinner animation="border" variant="dark" />
 
+    </div> 
+}
     
     return (
         <Container>
