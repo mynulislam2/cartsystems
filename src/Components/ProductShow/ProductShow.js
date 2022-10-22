@@ -4,20 +4,22 @@ import { Container, Form, Col, Row } from 'react-bootstrap';
 import { ProductsApi } from '../../Api/ProductsApi';
 import ProductCard from '../ProductCard/ProductCard';
 
-const ProductShow = () => {
+const ProductShow = ({setCartItem}) => {
     const [Products, setProducts] = useState([])
     const [Categories, setCategories] = useState([])
-
-    useEffect(() => {
+    const HandleGetProduct = () => {
         ProductsApi.getProduct()
             .then(function (res) {
                 // handle success
-                setProducts(res.data);
+                setProducts(res.data.sort((a, b) => a.price - b.price));
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
+    }
+    useEffect(() => {
+        HandleGetProduct()
         ProductsApi.getCategory()
             .then(function (res) {
                 // handle success
@@ -31,16 +33,22 @@ const ProductShow = () => {
 
     const HandleSpecificCategory = (SelectedCategory) => {
         console.log(SelectedCategory)
-        ProductsApi.SelectedCategory(SelectedCategory)
-            .then(function (res) {
-                // handle success
-                console.log(res.data)
-                setProducts(res.data);
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+        if (SelectedCategory === "all") {
+            HandleGetProduct()
+
+        }
+        else {
+            ProductsApi.SelectedCategory(SelectedCategory)
+                .then(function (res) {
+                    // handle success
+                    console.log(res.data)
+                    setProducts(res.data);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+        }
     }
     const HandlePriceSort = (sortType) => {
         if ("Lowest to Highest" == sortType) {
@@ -54,12 +62,15 @@ const ProductShow = () => {
         }
     }
 
+
+    
     return (
         <Container>
             <div className="d-flex justify-content-end">
                 <div className='d-flex justify-content-between'>
                     <div>
                         <Form.Select aria-label="Default select example" onChange={(e) => HandleSpecificCategory(e.target.value)}>
+                            <option>all</option>
                             {Categories.map((category, id) => <option key={id} >{category}</option>)}
                         </Form.Select>
                     </div>
@@ -75,7 +86,7 @@ const ProductShow = () => {
             <Row xs={1} sm={1} md={2} lg={3} xl={4} >
                 {
                     Products.map((product) => {
-                        return <ProductCard key={product.id} Id={product.id} Image={product.image} Tittle={product.title} Description={product.description} price={product.price}></ProductCard>
+                        return <ProductCard key={product.id} setCartItem={setCartItem} Id={product.id} Image={product.image} Tittle={product.title} Description={product.description} price={product.price}></ProductCard>
                     })
                 }
             </Row>

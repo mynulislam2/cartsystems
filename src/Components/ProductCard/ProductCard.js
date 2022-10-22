@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import { FaRegStarHalf,FaRegStar } from "react-icons/fa";
+import { FaRegStarHalf, FaRegStar } from "react-icons/fa";
 import '../../css/Product/ProductCard.css'
-const ProductCard = ({ Id, price, Image, Tittle, Description, Details }) => {
-
+import { AddToCart } from '../../utils/ManageCart';
+const ProductCard = ({ setCartItem, Id, price, Image, Tittle, Description, Details }) => {
+    const HandleAddToCart = async () => {
+        const StoreAddtoCart = await AddToCart(Id, price, Image, Tittle,)
+        setCartItem(StoreAddtoCart)
+    }
 
 
 
 
     return (
         <Col className="mt-4">
-            <Card style={{ width: "17rem", height: "500px",border:"none" }}>
-                <Card.Img width="200px" height="200px" variant="top" src={Image} />
+            <Card style={{ wIdth: "17rem", height: "500px", border: "none" }}>
+                <Card.Img wIdth="200px" height="200px" variant="top" src={Image} />
                 <Card.Body className="mb-0 pb-0 ">
                     <Card.Title >{Tittle.slice(0, 60)}</Card.Title>
                     <Card.Text>
@@ -19,7 +23,7 @@ const ProductCard = ({ Id, price, Image, Tittle, Description, Details }) => {
                     </Card.Text>
                     <p className="mb-0 pb-0">Price: {price} $</p>
                 </Card.Body>
-                <Button>Add to Cart</Button>
+                <Button onClick={() => HandleAddToCart()}>Add to Cart</Button>
 
             </Card>
         </Col>
