@@ -39,9 +39,16 @@ const Header = ({ CartItem }) => {
                 {CartItem.map((item) => {
                     return <div className='px-3 py-2 bg-white d-flex gap-5 border-bottom'>
                         <img width="50rem" src={item.Image} alt="" />
-                        <p>
-                            {item.Tittle.slice(0, 20)}
-                        </p>
+                        <div>
+                            <p>
+                                {item.Tittle.slice(0, 20)}...
+
+                            </p>
+                            <p>
+                                {item.minimumQuantity}
+                            </p>
+                        </div>
+
                     </div>
                 })}
                 <Link to="/cart"> <Button className="w-100" >Show More</Button></Link>

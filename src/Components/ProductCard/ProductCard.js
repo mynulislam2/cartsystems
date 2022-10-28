@@ -3,9 +3,9 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import { FaRegStarHalf, FaRegStar } from "react-icons/fa";
 import '../../css/Product/ProductCard.css'
 import { AddToCart } from '../../utils/ManageCart';
-const ProductCard = ({ setCartItem, Id, price, Image, Tittle, Description, Details }) => {
+const ProductCard = ({ setCartItem, Id, price, Image, Tittle, Description, Details,minimumQuantity }) => {
     const HandleAddToCart = async () => {
-        const StoreAddtoCart = await AddToCart(Id, price, Image, Tittle,)
+        const StoreAddtoCart = await AddToCart(Id, price, Image, Tittle,minimumQuantity)
         setCartItem(StoreAddtoCart)
     }
 
@@ -22,6 +22,7 @@ const ProductCard = ({ setCartItem, Id, price, Image, Tittle, Description, Detai
                         {Description.slice(0, 70)}
                     </Card.Text>
                     <p className="mb-0 pb-0">Price: {price} $</p>
+                    <p>Minimum Quantity: {minimumQuantity}</p>
                 </Card.Body>
                 <Button onClick={() => HandleAddToCart()}>Add to Cart</Button>
 

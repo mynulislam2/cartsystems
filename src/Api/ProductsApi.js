@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const ProductsApi = {
     getProduct: async () => {
-        return axios.get(`https://fakestoreapi.com/products/?limit=10`)
+        return fetch('Products.json')
     },
     getCategory: async () => {
         return axios.get(`https://fakestoreapi.com/products/categories`)
